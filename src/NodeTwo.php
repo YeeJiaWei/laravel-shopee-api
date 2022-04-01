@@ -34,28 +34,23 @@ class NodeTwo
         return $this->timestamp;
     }
 
-    private function getAccessToken(): string
-    {
-        return '6d4f6578594d52546345765456564a78';
-    }
-
     private function generateSignature($uri)
     {
 
-        $baseString = $this->client->configs['partner_id'] . $uri . $this->getTimestamp() . $this->getAccessToken() . $this->client->shopId;
+        $baseString = $this->client->getConfigs()['partner_id'] . $uri . $this->getTimestamp() . $this->client->getAccessToken() . $this->client->getShopId();
         // $baseString = $this->getPartnerId() . $uri . $this->getTimestamp() . $this->getAccessToken() . $this->getShopId();
         // dd($baseString);
 
-        return hash_hmac('sha256', $baseString, $this->client->configs['partner_key']);
+        return hash_hmac('sha256', $baseString, $this->client->getConfigs()['partner_key']);
     }
 
     private function getDefaultParameters($uri)
     {
         return [
-            'partner_id' => (int)$this->client->configs['partner_id'],
+            'partner_id' => (int)$this->client->getConfigs()['partner_id'],
             'timestamp' => $this->getTimestamp(),
-            'access_token' => $this->getAccessToken(),
-            'shop_id' => (int)$this->client->shopId,
+            'access_token' => $this->client->getAccessToken(),
+            'shop_id' => (int)$this->client->getShopId(),
             'sign' => $this->generateSignature($uri),
         ];
     }
