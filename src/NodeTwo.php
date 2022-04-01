@@ -26,32 +26,16 @@ class NodeTwo
     public function __construct(Client $client)
     {
         $this->client = $client;
-        $this->timestamp = now()->timestamp;
-    }
-
-    private function getTimestamp(): int
-    {
-        return $this->timestamp;
-    }
-
-    private function generateSignature($uri)
-    {
-
-        $baseString = $this->client->getConfigs()['partner_id'] . $uri . $this->getTimestamp() . $this->client->getAccessToken() . $this->client->getShopId();
-        // $baseString = $this->getPartnerId() . $uri . $this->getTimestamp() . $this->getAccessToken() . $this->getShopId();
-        // dd($baseString);
-
-        return hash_hmac('sha256', $baseString, $this->client->getConfigs()['partner_key']);
     }
 
     private function getDefaultParameters($uri)
     {
         return [
             'partner_id' => (int)$this->client->getConfigs()['partner_id'],
-            'timestamp' => $this->getTimestamp(),
+            'timestamp' => $this->client->getTimestamp(),
             'access_token' => $this->client->getAccessToken(),
             'shop_id' => (int)$this->client->getShopId(),
-            'sign' => $this->generateSignature($uri),
+            'sign' => $this->client->generateSignature($uri),
         ];
     }
 
