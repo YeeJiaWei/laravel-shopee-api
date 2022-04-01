@@ -15,7 +15,7 @@ class Chat extends NodeTwo
 
     public function getMessage(int $conversation_id, array $parameters = [])
     {
-        return $this->post('/get_message', array_merge($parameters, ['conversation_id' => $conversation_id]));
+        return $this->get('/get_message', array_merge($parameters, ['conversation_id' => $conversation_id]));
     }
 
     public function sendMessage(int $to_id, array $parameters = [])

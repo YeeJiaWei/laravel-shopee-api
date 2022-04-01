@@ -52,8 +52,6 @@ class Client
     public function generateSignature($uri): string
     {
         $baseString = $this->getConfigs()['partner_id'] . $uri . $this->getTimestamp() . $this->getAccessToken() . $this->getShopId();
-        // $baseString = $this->getPartnerId() . $uri . $this->getTimestamp() . $this->getAccessToken() . $this->getShopId();
-         dd($baseString);
 
         return hash_hmac('sha256', $baseString, $this->getConfigs()['partner_key']);
     }
