@@ -3,6 +3,10 @@
     "description": "Laravel Wrapper for shopee api",
     "type": "library",
     "license": "MIT",
+    "require": {
+        "illuminate/http": "^8.0|^9.0",
+        "guzzlehttp/guzzle": "^7.4"
+    },
     "autoload": {
         "psr-4": {
             "Yeejiawei\\LaravelShopeeApi\\": "src/"
@@ -14,5 +18,6 @@
             "email": "yeejiawei0811@gmail.com"
         }
     ],
-    "require": {}
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
