@@ -18,6 +18,16 @@ class Chat extends NodeTwo
         return $this->get('/get_message', array_merge($parameters, ['conversation_id' => $conversation_id]));
     }
 
+    /**
+     * @param int $to_id
+     * @param array $parameters
+     * 'message_type' => 'text',
+     * 'content' => [
+     *      'text' => 'hello world'
+     * ]
+     * @return mixed
+     * @throws \Exception
+     */
     public function sendMessage(int $to_id, array $parameters = [])
     {
         return $this->post('/send_message', array_merge($parameters, [
@@ -25,6 +35,13 @@ class Chat extends NodeTwo
         ]));
     }
 
+    /**
+     * @param int $to_id
+     * @param string $message
+     * @return mixed
+     * @throws \Exception
+     */
+    // currently have error 'no partner_id'
     public function sendAutoreplyMessage(int $to_id, string $message)
     {
         return $this->post('/send_autoreply_message', [
@@ -78,7 +95,7 @@ class Chat extends NodeTwo
         return $this->post('/unpin_conversation', ['conversation_id' => $conversation_id]);
     }
 
-    public function readConversationn(int $conversation_id, string $last_read_message_id)
+    public function readConversation(int $conversation_id, string $last_read_message_id)
     {
         return $this->post('/read_conversation', [
             'conversation_id' => $conversation_id,
