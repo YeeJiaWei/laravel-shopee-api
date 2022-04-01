@@ -1,5 +1,7 @@
 # Laravel Shopee API
 
+
+## Usage
 First, initialise the Client
 ```php
 $client = new  \Yeejiawei\LaravelShopeeApi\Client([
